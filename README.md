@@ -1,3 +1,1 @@
 # Backend Test Case
-
-## schema
