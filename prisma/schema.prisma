@@ -23,6 +23,7 @@ model Member {
 model Book {
   code          String  @id @default(uuid())
   title         String
+  author        String
   stock         Int     @default(1)
   borrowedBy    BorrowedBook[]
 }
