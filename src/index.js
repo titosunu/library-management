@@ -1,10 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
-const { PrismaClient } = require("@prisma/client");
 
-const prisma = new PrismaClient();
 const app = express();
-
 dotenv.config();
 
 const PORT = process.env.PORT;
@@ -16,80 +13,20 @@ app.get("/", (req, res) => {
 });
 
 // CRUD Books
-app.get("/books", async (req, res) => {
-  const books = await prisma.book.findMany();
-  res.send(books);
-});
+const booksController = require("./book/book.controller");
+app.use("/books", booksController);
 
-app.get("/books/:code", async (req, res) => {
-  const codeBook = req.params.code;
+// CRUD Members
+const membersController = require("./member/member.controller");
+app.use("/members", membersController);
 
-  const books = await prisma.book.findUnique({
-    where: {
-      code: codeBook,
-    },
-  });
+// Borrow books
+const borrowController = require("./borrow/borrow.controller");
+app.use("/borrow", borrowController);
 
-  if (!books) {
-    return res.status(400).send("book not found!");
-  }
-
-  res.send(books);
-});
-
-app.post("/books", async (req, res) => {
-  const newBook = req.body;
-
-  const books = await prisma.book.create({
-    data: {
-      title: newBook.title,
-      author: newBook.author,
-    },
-  });
-
-  res.send({
-    data: books,
-    message: "create new book success!",
-  });
-});
-
-app.delete("/books/:code", async (req, res) => {
-  const codeBook = req.params.code;
-
-  await prisma.book.delete({
-    where: {
-      code: codeBook,
-    },
-  });
-
-  res.send("book deleted!");
-});
-
-app.patch("/books/:code", async (req, res) => {
-  const codeBook = req.params.code;
-  const newBook = req.body;
-
-  const books = await prisma.book.update({
-    where: {
-      code: codeBook,
-    },
-    data: {
-      title: newBook.title,
-      author: newBook.author,
-      borrowedBy: newBook.borrowedBy,
-    },
-  });
-
-  res.send({
-    data: books,
-    message: "book success edited!",
-  });
-});
-// End CRUD Books
-
-// CRUD Member
-// ...
-// EndCRUD Member
+// Return Books
+const returnController = require("./return/return.controller");
+app.use("/return", returnController);
 
 app.listen(PORT, () => {
   console.log(`Express Api running on PORT http://localhost:${PORT}/`);
