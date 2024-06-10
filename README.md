@@ -47,3 +47,41 @@ Api akan berjalan di server http://localhost:3000. check endpoint api menggunaka
 ### Return
 
 - POST /return ( Mengembalikan buku yang dipinjam. Membutuhkan \`memberId\` dan \`bookId\` )
+
+## Schema
+
+### Member
+
+```graphql
+model Member {
+  code           String         @id @default(uuid())
+  name           String
+  borrowedBooks  BorrowedBook[]
+  penaltyEndDate DateTime?
+}
+```
+
+### Book
+
+```graphql
+model Book {
+  code       String         @id @default(uuid())
+  title      String
+  stock      Int
+  borrowedBy BorrowedBook[]
+}
+```
+
+### BorrowedBook
+
+```graphql
+model BorrowedBook {
+  id         Int      @id @default(autoincrement())
+  memberId   String
+  bookId     String
+  borrowedAt DateTime @default(now())
+
+  member     Member   @relation(fields: [memberId], references: [id])
+  book       Book     @relation(fields: [bookId], references: [id])
+}
+```
