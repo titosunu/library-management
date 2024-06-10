@@ -32,7 +32,7 @@ Api akan berjalan di server http://localhost:3000. check endpoint api menggunaka
 - DELETE /books/:code ( Menghapus buku berdasarkan kode )
 - PATCH /books/:code ( Mengedit buku berdasarkan kode )
 
-### Anggota (Members)
+### Members
 
 - GET /members ( Mendapatkan daftar semua anggota beserta jumlah buku yang mereka pinjam )
 - GET /members/:code ( Mendapatkan detail anggota spesifik berdasarkan kode. )
@@ -40,10 +40,10 @@ Api akan berjalan di server http://localhost:3000. check endpoint api menggunaka
 - DELETE /members/:code ( Menghapus anggota berdasarkan kode )
 - PATCH /members/:code ( Mengedit anggota berdasarkan kode )
 
-### Meminjam (Borrow)
+### Borrow
 
 - POST /borrow ( Meminjam buku. Membutuhkan \`memberId\` dan \`bookId\` )
 
-### Mengembalikan (Return)
+### Return
 
 - POST /return ( Mengembalikan buku yang dipinjam. Membutuhkan \`memberId\` dan \`bookId\` )
