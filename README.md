@@ -8,7 +8,7 @@ Proyek ini adalah Backend test sebuah API Sistem Manajemen Perpustakaan, yang di
    ```sh
    git clone https://github.com/titosunu/backend-test
    ```
-2. Jalankan server:
+2. Instal dependencies:
    ```sh
    npm install
    ```
