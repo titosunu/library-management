@@ -1,6 +1,6 @@
 # Library Management System
 
-Proyek ini adalah Backend test sebuah API Sistem Manajemen Perpustakaan, yang dibangun menggunakan Node.js, Express, Swagger, Prisma ORM, dan MySql. API ini memungkinkan member untuk meminjam dan mengembalikan buku dengan berbagai batasan dan melacak buku-buku dan member. **Untuk Soal algoritma berada di folder algorithms**.
+Proyek ini adalah Backend test sebuah API Sistem Manajemen Perpustakaan, yang dibangun menggunakan Node.js, Express, Swagger, Prisma ORM, dan MySql. **Untuk Soal algoritma berada di folder algorithms**.
 
 ## Instalasi
 
