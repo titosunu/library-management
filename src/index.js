@@ -12,6 +12,10 @@ app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
+// Swagger UI setup
+const { swaggerUi, specs } = require("./swagger");
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
+
 // CRUD Books
 const booksController = require("./book/book.controller");
 app.use("/books", booksController);

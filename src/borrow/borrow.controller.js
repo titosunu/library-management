@@ -1,53 +1,73 @@
+// controller borrow layer handle req & res
 const express = require("express");
-const prisma = require("../db");
+const { borrowBook } = require("./borrow.service");
 
 const router = express.Router();
 
+// schema swagger
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     BorrowedBook:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: integer
+ *         memberId:
+ *           type: string
+ *         bookId:
+ *           type: string
+ *         borrowedAt:
+ *           type: string
+ *           format: date-time
+ *         member:
+ *           $ref: '#/components/schemas/Member'
+ *         book:
+ *           $ref: '#/components/schemas/Book'
+ */
+// end schema swagger
+
+// borrow
+/**
+ * @swagger
+ * /borrow:
+ *   post:
+ *     summary: Borrow a book
+ *     tags: [Borrow]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               memberId:
+ *                 type: string
+ *               bookId:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Successfully borrowed the book
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/BorrowedBook'
+ *       500:
+ *         description: Internal server error
+ */
 router.post("/", async (req, res) => {
   const { memberId, bookId } = req.body;
-
   try {
-    const member = await prisma.member.findUnique({
-      where: { code: memberId },
+    const borrow = await borrowBook(memberId, bookId);
+    res.send({
+      data: borrow,
+      message: "Book borrowed successfully",
     });
-    const book = await prisma.book.findUnique({ where: { code: bookId } });
-
-    if (!member || !book) {
-      return res.status(404).send("Member or Book not found");
-    }
-
-    if (member.penaltyEndDate && new Date() < new Date(member.penaltyEndDate)) {
-      return res.status(400).send("Member is currently penalized");
-    }
-
-    const borrowedBooksCount = await prisma.borrowedBook.count({
-      where: { memberId },
-    });
-
-    if (borrowedBooksCount >= 2) {
-      return res.status(400).send("Member cannot borrow more than 2 books");
-    }
-
-    if (book.quantity <= 0) {
-      return res.status(400).send("Book is not available");
-    }
-
-    await prisma.borrowedBook.create({
-      data: {
-        memberId,
-        bookId,
-      },
-    });
-
-    await prisma.book.update({
-      where: { code: bookId },
-      data: { stock: { decrement: 1 } },
-    });
-
-    res.status(200).send("Book borrowed successfully");
   } catch (error) {
     res.status(500).send(error.message);
   }
 });
+//end borrow
 
 module.exports = router;
