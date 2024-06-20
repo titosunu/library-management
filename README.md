@@ -1,6 +1,6 @@
 # Library Management System
 
-Proyek ini adalah Backend test sebuah API Sistem Manajemen Perpustakaan https://github.com/eigen3dev/backend-test-case, yang dibangun menggunakan Node.js, Express, Swagger, Prisma ORM, dan MySql. **Untuk Soal algoritma berada di folder algorithms**.
+API Sistem Manajemen Perpustakaan, yang dibangun menggunakan Node.js, Express, Swagger, Prisma ORM, dan MySql.
 
 ## Instalasi
 
