@@ -6,7 +6,7 @@ API Sistem Manajemen Perpustakaan, yang dibangun menggunakan Node.js, Express, S
 
 1. Clone repositori:
    ```sh
-   git clone https://github.com/titosunu/backend-test
+   git clone https://github.com/titosunu/library-management
    ```
 2. Instal dependencies:
    ```sh
