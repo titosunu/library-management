@@ -13,7 +13,7 @@ Library Management System API, built using Node.js, Express, Swagger, Prisma ORM
    npm install
    ```
 3. Set up database
-   Perbarui URL koneksi database di prisma/.env & jalankan migrasi prisma
+   Update the database connection URL in prisma/.env and run the Prisma migrations.
 
 4. Start the server
    npm run dev
