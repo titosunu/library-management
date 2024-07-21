@@ -1,53 +1,52 @@
 # Library Management System
 
-API Sistem Manajemen Perpustakaan, yang dibangun menggunakan Node.js, Express, Swagger, Prisma ORM, dan MySql.
+Library Management System API, built using Node.js, Express, Swagger, Prisma ORM, and MySQL.
 
-## Instalasi
+## Installation
 
 1. Clone repositori:
    ```sh
    git clone https://github.com/titosunu/library-management
    ```
-2. Instal dependencies:
+2. Install dependencies:
    ```sh
    npm install
    ```
 3. Set up database
    Perbarui URL koneksi database di prisma/.env & jalankan migrasi prisma
 
-4. Jalankan Server
+4. Start the server
    npm run dev
 
 ## Swagger
 
-Api akan berjalan di server http://localhost:3000. check endpoint api menggunakan swagger akses /api-docs.
+The API will run on the server at http://localhost:3000. Check the API endpoints using Swagger at /api-docs.
 
 ## Endpoint API
 
 ### Books
 
-- GET /books ( Mendapatkan daftar semua buku )
-- GET /books/:code ( Mendapatkan detail buku spesifik berdasarkan kode )
-- POST /books ( Membuat buku baru )
-- DELETE /books/:code ( Menghapus buku berdasarkan kode )
-- PATCH /books/:code ( Mengedit buku berdasarkan kode )
+- GET /books (Retrieve a list of all books)
+- GET /books/:code (Retrieve details of a specific book by code)
+- POST /books (Create a new book)
+- DELETE /books/:code (Delete a book by code)
+- PATCH /books/:code (Edit a book by code)
 
 ### Members
 
-- GET /members ( Mendapatkan daftar semua anggota beserta jumlah buku yang mereka pinjam )
-- GET /members/:code ( Mendapatkan detail anggota spesifik berdasarkan kode. )
-- POST /members ( Membuat anggota baru )
-- DELETE /members/:code ( Menghapus anggota berdasarkan kode )
-- PATCH /members/:code ( Mengedit anggota berdasarkan kode )
+- GET /members (Retrieve a list of all members along with the number of books they have borrowed)
+- GET /members/:code (Retrieve details of a specific member by code)
+- POST /members (Create a new member)
+- DELETE /members/:code (Delete a member by code)
+- PATCH /members/:code (Edit a member by code)
 
 ### Borrow
 
-- POST /borrow ( Meminjam buku. Membutuhkan \`memberId\` dan \`bookId\` )
+- POST /borrow (Borrow a book. Requires memberId and bookId)
 
 ### Return
 
-- POST /return ( Mengembalikan buku yang dipinjam. Membutuhkan \`memberId\` dan \`bookId\` )
-
+- POST /return (Return a borrowed book. Requires memberId and bookId)
 ## Schema
 
 ### Member
